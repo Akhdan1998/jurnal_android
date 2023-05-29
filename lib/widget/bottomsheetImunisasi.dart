@@ -46,68 +46,69 @@ class _bottomsheetImunisasiState extends State<bottomsheetImunisasi> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      clipBehavior: Clip.hardEdge,
-      physics: BouncingScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      child: Container(
-        decoration: BoxDecoration(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+      ),
+      padding: EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
             color: Colors.white,
-            borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-        ),
-        padding: EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Pilih Profil Anak :',
-                    style: GoogleFonts.poppins().copyWith(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: '323232'.toColor(),
-                    ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Pilih Profil Anak :',
+                  style: GoogleFonts.poppins().copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: '323232'.toColor(),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(dataanak());
-                    },
-                    child: Container(
-                      color: Colors.white,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Buat Data Anak',
-                            style: GoogleFonts.poppins().copyWith(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w300,
-                              color: 'FF6969'.toColor(),
-                            ),
-                          ),
-                          SizedBox(width: 3),
-                          Icon(
-                            Icons.add_outlined,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(dataanak());
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Buat Data Anak',
+                          style: GoogleFonts.poppins().copyWith(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w300,
                             color: 'FF6969'.toColor(),
-                            size: 15,
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(width: 3),
+                        Icon(
+                          Icons.add_outlined,
+                          color: 'FF6969'.toColor(),
+                          size: 15,
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(height: 15),
-            Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Column(
+          ),
+          SizedBox(height: 15),
+          Column(
+            children: [
+              Container(
+                height: (Platform.isIOS) ? MediaQuery.of(context).size.height - 546 : MediaQuery.of(context).size.height - 418,
+                child: SingleChildScrollView(
+                  clipBehavior: Clip.hardEdge,
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  child: Column(
                     children: widget.listAnak
                         .map((e) =>
                         listAnak(e, (selectedAnak == e) ? true : false,
@@ -118,52 +119,52 @@ class _bottomsheetImunisasiState extends State<bottomsheetImunisasi> {
                             }))
                         .toList(),
                   ),
-                  SizedBox(height: 10),
-                  GestureDetector(
-                    onTap: () {
-                      pilihAnak();
-                      setState(() {
-                        isLoading = true;
-                      });
-                      Future.delayed(const Duration(seconds: 3), () {
-                        setState(() {
-                          isLoading = false;
-                        });
-                      });
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      // width: MediaQuery.of(context).size.width,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: 'FF6969'.toColor(),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: isLoading
-                          ? Container(
-                        width: 20,
-                        height: 20,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                              color: Colors.white, strokeWidth: 2),
-                        ),
-                      )
-                          : Text(
-                        'Pilih Profil',
-                        style: GoogleFonts.poppins().copyWith(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: 'FFFFFF'.toColor(),
-                        ),
-                      ),
+                ),
+              ),
+              SizedBox(height: 10),
+              GestureDetector(
+                onTap: () {
+                  pilihAnak();
+                  setState(() {
+                    isLoading = true;
+                  });
+                  Future.delayed(const Duration(seconds: 3), () {
+                    setState(() {
+                      isLoading = false;
+                    });
+                  });
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  // width: MediaQuery.of(context).size.width,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: 'FF6969'.toColor(),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: isLoading
+                      ? Container(
+                    width: 20,
+                    height: 20,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                          color: Colors.white, strokeWidth: 2),
+                    ),
+                  )
+                      : Text(
+                    'Pilih Profil',
+                    style: GoogleFonts.poppins().copyWith(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: 'FFFFFF'.toColor(),
                     ),
                   ),
-                  SizedBox(height: 15),
-                ],
+                ),
               ),
-            ),
-          ],
-        ),
+              SizedBox(height: 15),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -630,7 +630,7 @@ class _ProfilState extends State<Profil> {
                                           : snapshot.dataanak!.first.berat_lahir
                                                       .toString() +
                                                   ' ' +
-                                                  'gr' ??
+                                                  'kg' ??
                                               '',
                                       style: GoogleFonts.poppins().copyWith(
                                         fontWeight: FontWeight.bold,
@@ -777,6 +777,7 @@ class _ProfilState extends State<Profil> {
                                               (e) => e.is_active == 1)));
                                     },
                                     child: Container(
+                                      padding: (Platform.isIOS) ? EdgeInsets.only(top: 8, bottom: 8) : EdgeInsets.only(top: 1, bottom: 1),
                                       color: Colors.white,
                                       child: Row(
                                         mainAxisAlignment:
@@ -807,6 +808,7 @@ class _ProfilState extends State<Profil> {
                                               (e) => e.is_active == 1)));
                                     },
                                     child: Container(
+                                      padding: (Platform.isIOS) ? EdgeInsets.only(top: 8, bottom: 8) : EdgeInsets.only(top: 1, bottom: 1),
                                       color: Colors.white,
                                       child: Row(
                                         mainAxisAlignment:
@@ -837,6 +839,7 @@ class _ProfilState extends State<Profil> {
                                               (e) => e.is_active == 1)));
                                     },
                                     child: Container(
+                                      padding: (Platform.isIOS) ? EdgeInsets.only(top: 8, bottom: 8) : EdgeInsets.only(top: 1, bottom: 1),
                                       color: Colors.white,
                                       child: Row(
                                         mainAxisAlignment:

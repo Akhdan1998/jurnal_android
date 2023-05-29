@@ -77,15 +77,20 @@ class _KehamilanState extends State<Kehamilan> {
                 builder: (context, snapshot) {
               if (snapshot is BuntingLoaded) {
                 if (snapshot.bunting != null) {
-                  var date =
-                  DateTime.fromMillisecondsSinceEpoch(
-                      snapshot.bunting!
-                          .hpl!.toInt()! *
-                          1000);
+                  // var date =
+                  // DateTime.fromMillisecondsSinceEpoch(
+                  //     snapshot.bunting!
+                  //         .hpl!.toInt()! *
+                  //         1000);
+                  //
+                  // String tanggal =
+                  // DateFormat('dd MMMM yyyy')
+                  //     .format(date);
+                  DateTime haha = DateFormat('yyyy-MM-dd hh:mm:ss')
+                      .parse(snapshot.bunting!.hpl.toString());
 
-                  String tanggal =
-                  DateFormat('dd MMMM yyyy')
-                      .format(date);
+                  String date =
+                  DateFormat('dd MMMM yyy').format(haha);
                   return Column(
                     children: [
                       Stack(
@@ -277,7 +282,8 @@ class _KehamilanState extends State<Kehamilan> {
                                             ),
                                             SizedBox(width: 3),
                                             Text(
-                                              tanggal,
+                                              date,
+                                              // snapshot.bunting!.hpl ?? '',
                                               style: GoogleFonts.poppins()
                                                   .copyWith(
                                                       fontWeight:

@@ -54,6 +54,7 @@ class _beratbadanState extends State<beratbadan> {
       throw "Error ${res.statusCode} => ${body["meta"]["message"]}";
     }
   }
+
   Future<void> dataBerat(
       String anak_id, String berat, String checked_at) async {
     Uri url = Uri.parse(
@@ -126,14 +127,16 @@ class _beratbadanState extends State<beratbadan> {
                               isScrollControlled: true,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(15), topLeft: Radius.circular(15))),
+                                      topRight: Radius.circular(15),
+                                      topLeft: Radius.circular(15))),
                               context: context,
                               builder: (context) {
                                 return SingleChildScrollView(
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+                                          topRight: Radius.circular(15),
+                                          topLeft: Radius.circular(15)),
                                       color: Colors.white,
                                     ),
                                     // height: MediaQuery.of(context).size.height,
@@ -141,9 +144,12 @@ class _beratbadanState extends State<beratbadan> {
                                         top: 16,
                                         right: 16,
                                         left: 16,
-                                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                                        bottom: MediaQuery.of(context)
+                                            .viewInsets
+                                            .bottom),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Isi Data Berat',
@@ -170,33 +176,39 @@ class _beratbadanState extends State<beratbadan> {
                                               size: 20,
                                               color: '8F8F8F'.toColor(),
                                             ),
-                                            hintStyle: GoogleFonts.poppins().copyWith(
+                                            hintStyle:
+                                                GoogleFonts.poppins().copyWith(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w300,
                                               color: '989797'.toColor(),
                                             ),
                                             hintText: '24 Maret 1998',
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                                              borderSide:
-                                              BorderSide(width: 1, color: 'FF6969'.toColor()),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
+                                              borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: 'FF6969'.toColor()),
                                             ),
-                                            contentPadding:
-                                            EdgeInsets.only(top: 5, left: 10, bottom: 10),
+                                            contentPadding: EdgeInsets.only(
+                                                top: 5, left: 10, bottom: 10),
                                             border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(5)),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
                                           ),
                                           onTap: () async {
-                                            DateTime? pickeddate = await showDatePicker(
-                                                context: context,
-                                                initialDate: DateTime.now(),
-                                                firstDate: DateTime(1945),
-                                                lastDate: DateTime(2500));
+                                            DateTime? pickeddate =
+                                                await showDatePicker(
+                                                    context: context,
+                                                    initialDate: DateTime.now(),
+                                                    firstDate: DateTime(1945),
+                                                    lastDate: DateTime(2500));
 
                                             if (pickeddate != null) {
                                               setState(() {
                                                 tanggalcek2.text =
-                                                    DateFormat('yyyy-MM-dd').format(pickeddate);
+                                                    DateFormat('yyyy-MM-dd')
+                                                        .format(pickeddate);
                                               });
                                             }
                                           },
@@ -215,60 +227,90 @@ class _beratbadanState extends State<beratbadan> {
                                           controller: berat,
                                           decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                                              borderSide:
-                                              BorderSide(width: 1, color: 'FF6969'.toColor()),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
+                                              borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: 'FF6969'.toColor()),
                                             ),
-                                            contentPadding:
-                                            EdgeInsets.only(left: 10, top: 5, bottom: 5),
-                                            hintStyle: GoogleFonts.poppins().copyWith(
+                                            contentPadding: EdgeInsets.only(
+                                                left: 10, top: 5, bottom: 5),
+                                            hintStyle:
+                                                GoogleFonts.poppins().copyWith(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w300,
                                               color: '989797'.toColor(),
                                             ),
                                             hintText: '10',
                                             border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                           ),
                                         ),
                                         SizedBox(height: 14),
-                                        BlocBuilder<BuatdataanakCubit, BuatdataanakState>(
+                                        BlocBuilder<BuatdataanakCubit,
+                                            BuatdataanakState>(
                                           builder: (context, snapshot) {
-                                            if (snapshot is BuatdataanakLoaded) {
+                                            if (snapshot
+                                                is BuatdataanakLoaded) {
                                               if (snapshot.dataanak != null) {
                                                 return GestureDetector(
                                                   onTap: () async {
                                                     await dataBerat(
-                                                        snapshot.dataanak!.first.anak_id.toString(),
-                                                        berat.text,
-                                                        tanggalcek2.text)
+                                                            snapshot.dataanak!
+                                                                .first.anak_id
+                                                                .toString(),
+                                                            berat.text,
+                                                            tanggalcek2.text)
                                                         .whenComplete(() {
-                                                      context.read<TumbuhBeratCubit>().gettumbuhBerat(
-                                                          'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4',
-                                                          snapshot.dataanak!.first.anak_id.toString());
-                                                      context.read<HasilBeratCubit>().gethasilBerat(
-                                                        'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4',
-                                                        snapshot.dataanak!.first.gender.toString(),
-                                                        snapshot.dataanak!.first.anak_id.toString(),
-                                                      );
-                                                      Navigator.of(context).pop();
+                                                      context
+                                                          .read<
+                                                              TumbuhBeratCubit>()
+                                                          .gettumbuhBerat(
+                                                              'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4',
+                                                              snapshot.dataanak!
+                                                                  .first.anak_id
+                                                                  .toString());
+                                                      context
+                                                          .read<
+                                                              HasilBeratCubit>()
+                                                          .gethasilBerat(
+                                                            'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4',
+                                                            snapshot.dataanak!
+                                                                .first.gender
+                                                                .toString(),
+                                                            snapshot.dataanak!
+                                                                .first.anak_id
+                                                                .toString(),
+                                                          );
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     });
                                                   },
                                                   child: Container(
                                                     alignment: Alignment.center,
-                                                    width: MediaQuery.of(context).size.width,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
                                                     height: 40,
                                                     decoration: BoxDecoration(
                                                       color: 'FF6969'.toColor(),
-                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
                                                     ),
                                                     child: Text(
                                                       'Simpan Data',
-                                                      style: GoogleFonts.poppins().copyWith(
+                                                      style:
+                                                          GoogleFonts.poppins()
+                                                              .copyWith(
                                                         fontSize: 12,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: 'FFFFFF'.toColor(),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            'FFFFFF'.toColor(),
                                                       ),
                                                     ),
                                                   ),
@@ -278,7 +320,8 @@ class _beratbadanState extends State<beratbadan> {
                                               }
                                             } else {
                                               return Center(
-                                                child: CircularProgressIndicator(
+                                                child:
+                                                    CircularProgressIndicator(
                                                   color: 'FF6969'.toColor(),
                                                 ),
                                               );
@@ -331,14 +374,10 @@ class _beratbadanState extends State<beratbadan> {
                                     aspectRatio: 15 / 10,
                                     child: LineChart(
                                       LineChartData(
-                                        maxX: 350,
+                                        maxX: 6,
                                         minX: 0,
-                                        maxY: 150,
-                                        minY: 0,
-                                        // maxX: 6,
-                                        // minX: 0,
-                                        // maxY: 15,
-                                        // minY: 2,
+                                        maxY: 15,
+                                        minY: 2,
                                         clipData: FlClipData(
                                             top: true,
                                             bottom: false,
@@ -493,296 +532,430 @@ class _beratbadanState extends State<beratbadan> {
                         return SizedBox();
                       }
                     } else {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: 'FF6969'.toColor(),
-                        ),
+                      return BlocBuilder<GrafikBeratCubit, GrafikBeratState>(
+                        builder: (context, data) {
+                          if (data is GrafikBeratLoaded) {
+                            if (data.grafikberat != null) {
+                              return Container(
+                                padding: EdgeInsets.only(right: 16),
+                                child: AspectRatio(
+                                  aspectRatio: 15 / 10,
+                                  child: LineChart(
+                                    LineChartData(
+                                      maxX: 6,
+                                      minX: 0,
+                                      maxY: 15,
+                                      minY: 2,
+                                      clipData: FlClipData(
+                                          top: true,
+                                          bottom: false,
+                                          left: false,
+                                          right: false),
+                                      titlesData: FlTitlesData(
+                                        show: true,
+                                        topTitles: AxisTitles(
+                                          sideTitles: SideTitles(
+                                            showTitles: false,
+                                          ),
+                                        ),
+                                        rightTitles: AxisTitles(
+                                          sideTitles: SideTitles(
+                                            showTitles: false,
+                                          ),
+                                        ),
+                                      ),
+                                      gridData: FlGridData(
+                                        show: true,
+                                        drawVerticalLine: false,
+                                        drawHorizontalLine: true,
+                                      ),
+                                      borderData: FlBorderData(
+                                        show: true,
+                                        border: Border(
+                                          top: BorderSide(
+                                            style: BorderStyle.solid,
+                                            color: 'CFCFCF'.toColor(),
+                                          ),
+                                        ),
+                                      ),
+                                      lineBarsData: [
+                                        LineChartBarData(
+                                          spots: data.grafikberat!.tigasd!
+                                              .map((e) => FlSpot(
+                                                  e.bulan!.toDouble(),
+                                                  e.berat!.toDouble() ?? 0.0))
+                                              .toList(),
+                                          isCurved: true,
+                                          color: Colors.blue,
+                                          // color: 'FF6969'.toColor(),
+                                          barWidth: 1,
+                                          dotData: FlDotData(show: false),
+                                        ),
+                                        LineChartBarData(
+                                          spots: data.grafikberat!.duasd!
+                                              .map((e) => FlSpot(
+                                                  e.bulan!.toDouble(),
+                                                  e.berat!.toDouble() ?? 0.0))
+                                              .toList(),
+                                          isCurved: true,
+                                          color: 'FD7948'.toColor(),
+                                          // color: 'FF6969'.toColor(),
+                                          barWidth: 1,
+                                          dotData: FlDotData(show: false),
+                                        ),
+                                        LineChartBarData(
+                                          spots: data.grafikberat!.satusd!
+                                              .map((e) => FlSpot(
+                                                  e.bulan!.toDouble(),
+                                                  e.berat!.toDouble() ?? 0.0))
+                                              .toList(),
+                                          isCurved: true,
+                                          color: '9E401E'.toColor(),
+                                          // color: 'FF6969'.toColor(),
+                                          barWidth: 1,
+                                          dotData: FlDotData(show: false),
+                                        ),
+                                        LineChartBarData(
+                                          spots: data.grafikberat!.median!
+                                              .map((e) => FlSpot(
+                                                  e.bulan!.toDouble(),
+                                                  e.berat!.toDouble() ?? 0.0))
+                                              .toList(),
+                                          isCurved: true,
+                                          color: '529166'.toColor(),
+                                          // color: 'FF6969'.toColor(),
+                                          barWidth: 1,
+                                          dotData: FlDotData(show: false),
+                                        ),
+                                        LineChartBarData(
+                                          spots: data.grafikberat!.mintigasd!
+                                              .map((e) => FlSpot(
+                                                  e.bulan!.toDouble(),
+                                                  e.berat!.toDouble() ?? 0.0))
+                                              .toList(),
+                                          isCurved: true,
+                                          color: '9E401E'.toColor(),
+                                          // color: 'FF6969'.toColor(),
+                                          barWidth: 1,
+                                          dotData: FlDotData(show: false),
+                                        ),
+                                        LineChartBarData(
+                                          spots: data.grafikberat!.minduasd!
+                                              .map((e) => FlSpot(
+                                                  e.bulan!.toDouble(),
+                                                  e.berat!.toDouble() ?? 0.0))
+                                              .toList(),
+                                          isCurved: true,
+                                          color: 'FF6969'.toColor(),
+                                          barWidth: 1,
+                                          dotData: FlDotData(show: false),
+                                        ),
+                                        LineChartBarData(
+                                          spots: data.grafikberat!.minsatusd!
+                                              .map((e) => FlSpot(
+                                                  e.bulan!.toDouble(),
+                                                  e.berat!.toDouble() ?? 0.0))
+                                              .toList(),
+                                          isCurved: true,
+                                          color: Colors.purpleAccent,
+                                          // color: 'FC7847'.toColor(),
+                                          // color: 'FF6969'.toColor(),
+                                          barWidth: 1,
+                                          dotData: FlDotData(show: false),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return SizedBox();
+                            }
+                          } else {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: 'FF6969'.toColor(),
+                              ),
+                            );
+                          }
+                        },
                       );
                     }
                   }),
                   SizedBox(height: 11),
                   Container(
-                      padding: EdgeInsets.only(left: 12, right: 12, bottom: 12),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: (Platform.isIOS) ? 15 : 12,
-                                    height: (Platform.isIOS) ? 15 : 12,
+                    padding: EdgeInsets.only(left: 12, right: 12, bottom: 12),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: (Platform.isIOS) ? 15 : 12,
+                                  height: (Platform.isIOS) ? 15 : 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: '9E401E'.toColor(),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  '- 3 SD',
+                                  style: GoogleFonts.poppins().copyWith(
+                                      fontSize: (Platform.isIOS) ? 10 : 9,
+                                      fontWeight: FontWeight.bold,
+                                      color: '434343'.toColor()),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: (Platform.isIOS) ? 15 : 12,
+                                  height: (Platform.isIOS) ? 15 : 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: 'FC7847'.toColor(),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  '- 2 SD',
+                                  style: GoogleFonts.poppins().copyWith(
+                                      fontSize: (Platform.isIOS) ? 10 : 9,
+                                      fontWeight: FontWeight.bold,
+                                      color: '434343'.toColor()),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: (Platform.isIOS) ? 15 : 12,
+                                  height: (Platform.isIOS) ? 15 : 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: Colors.purpleAccent,
+                                    // color: 'FC7847'.toColor(),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  '- 1 SD',
+                                  style: GoogleFonts.poppins().copyWith(
+                                      fontSize: (Platform.isIOS) ? 10 : 9,
+                                      fontWeight: FontWeight.bold,
+                                      color: '434343'.toColor()),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: (Platform.isIOS) ? 15 : 12,
+                                  height: (Platform.isIOS) ? 15 : 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: '529166'.toColor(),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  'Median',
+                                  style: GoogleFonts.poppins().copyWith(
+                                      fontSize: (Platform.isIOS) ? 10 : 9,
+                                      fontWeight: FontWeight.bold,
+                                      color: '434343'.toColor()),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: (Platform.isIOS) ? 15 : 12,
+                                  height: (Platform.isIOS) ? 15 : 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    // color: 'FD7948'.toColor(),
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  '1 SD',
+                                  style: GoogleFonts.poppins().copyWith(
+                                      fontSize: (Platform.isIOS) ? 10 : 9,
+                                      fontWeight: FontWeight.bold,
+                                      color: '434343'.toColor()),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: (Platform.isIOS) ? 15 : 12,
+                                  height: (Platform.isIOS) ? 15 : 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: 'FD7948'.toColor(),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  '2 SD',
+                                  style: GoogleFonts.poppins().copyWith(
+                                      fontSize: (Platform.isIOS) ? 10 : 9,
+                                      fontWeight: FontWeight.bold,
+                                      color: '434343'.toColor()),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: (Platform.isIOS) ? 15 : 12,
+                                  height: (Platform.isIOS) ? 15 : 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: '9E401E'.toColor(),
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  '3 SD',
+                                  style: GoogleFonts.poppins().copyWith(
+                                      fontSize: (Platform.isIOS) ? 10 : 9,
+                                      fontWeight: FontWeight.bold,
+                                      color: '434343'.toColor()),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 11),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      selectedGrafik = '1';
+                                    });
+                                  },
+                                  child: Container(
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: '9E401E'.toColor(),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    '- 3 SD',
-                                    style: GoogleFonts.poppins().copyWith(
-                                        fontSize: (Platform.isIOS) ? 10 : 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: '434343'.toColor()),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: (Platform.isIOS) ? 15 : 12,
-                                    height: (Platform.isIOS) ? 15 : 12,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: 'FC7847'.toColor(),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    '- 2 SD',
-                                    style: GoogleFonts.poppins().copyWith(
-                                        fontSize: (Platform.isIOS) ? 10 : 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: '434343'.toColor()),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: (Platform.isIOS) ? 15 : 12,
-                                    height: (Platform.isIOS) ? 15 : 12,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.purpleAccent,
-                                      // color: 'FC7847'.toColor(),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    '- 1 SD',
-                                    style: GoogleFonts.poppins().copyWith(
-                                        fontSize: (Platform.isIOS) ? 10 : 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: '434343'.toColor()),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: (Platform.isIOS) ? 15 : 12,
-                                    height: (Platform.isIOS) ? 15 : 12,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: '529166'.toColor(),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'Median',
-                                    style: GoogleFonts.poppins().copyWith(
-                                        fontSize: (Platform.isIOS) ? 10 : 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: '434343'.toColor()),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: (Platform.isIOS) ? 15 : 12,
-                                    height: (Platform.isIOS) ? 15 : 12,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      // color: 'FD7948'.toColor(),
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    '1 SD',
-                                    style: GoogleFonts.poppins().copyWith(
-                                        fontSize: (Platform.isIOS) ? 10 : 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: '434343'.toColor()),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: (Platform.isIOS) ? 15 : 12,
-                                    height: (Platform.isIOS) ? 15 : 12,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: 'FD7948'.toColor(),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    '2 SD',
-                                    style: GoogleFonts.poppins().copyWith(
-                                        fontSize: (Platform.isIOS) ? 10 : 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: '434343'.toColor()),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: (Platform.isIOS) ? 15 : 12,
-                                    height: (Platform.isIOS) ? 15 : 12,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: '9E401E'.toColor(),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    '3 SD',
-                                    style: GoogleFonts.poppins().copyWith(
-                                        fontSize: (Platform.isIOS) ? 10 : 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: '434343'.toColor()),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 11),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedGrafik = '1';
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(5),
-                                          topLeft: Radius.circular(5),
-                                        ),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: 'FF6969'.toColor(),
-                                        ),
-                                        color: (selectedGrafik == '1')
-                                            ? 'FF6969'.toColor()
-                                            : Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(5),
+                                        topLeft: Radius.circular(5),
                                       ),
-                                      padding: EdgeInsets.only(
-                                          top: 3,
-                                          bottom: 3,
-                                          left: 23,
-                                          right: 23),
-                                      child: Text(
-                                        'Per Bulan',
+                                      border: Border.all(
+                                        width: 1,
+                                        color: 'FF6969'.toColor(),
+                                      ),
+                                      color: (selectedGrafik == '1')
+                                          ? 'FF6969'.toColor()
+                                          : Colors.white,
+                                    ),
+                                    padding: EdgeInsets.only(
+                                        top: 3, bottom: 3, left: 23, right: 23),
+                                    child: Text(
+                                      'Per Bulan',
+                                      style: GoogleFonts.poppins().copyWith(
+                                          fontSize: 11,
+                                          fontWeight: (selectedGrafik == '1')
+                                              ? FontWeight.bold
+                                              : FontWeight.w300,
+                                          color: (selectedGrafik == '1')
+                                              ? Colors.white
+                                              : 'FF6969'.toColor()),
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      selectedGrafik = '2';
+                                    });
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(5),
+                                        topRight: Radius.circular(5),
+                                      ),
+                                      border: Border.all(
+                                        width: 1,
+                                        color: 'FF6969'.toColor(),
+                                      ),
+                                      color: (selectedGrafik == '2')
+                                          ? 'FF6969'.toColor()
+                                          : Colors.white,
+                                    ),
+                                    padding: EdgeInsets.only(
+                                        top: 3, bottom: 3, left: 23, right: 23),
+                                    child: Text(
+                                      'Per Minggu',
+                                      style: GoogleFonts.poppins().copyWith(
+                                          fontSize: 11,
+                                          fontWeight: (selectedGrafik == '2')
+                                              ? FontWeight.bold
+                                              : FontWeight.w300,
+                                          color: (selectedGrafik == '2')
+                                              ? Colors.white
+                                              : 'FF6969'.toColor()),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Tanggal',
+                                  style: GoogleFonts.poppins().copyWith(
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 10,
+                                    color: '7A7A7A'.toColor(),
+                                  ),
+                                ),
+                                BlocBuilder<HasilBeratCubit, HasilBeratState>(
+                                    builder: (context, state) {
+                                  if (state is HasilBeratLoaded) {
+                                    if (state.hasilberat != null) {
+                                      var date =
+                                          DateTime.fromMillisecondsSinceEpoch(
+                                              state.hasilberat!.checked_at! *
+                                                  1000);
+                                      String tanggal =
+                                          DateFormat('dd MMMM yyyy')
+                                              .format(date);
+                                      return Text(
+                                        tanggal,
                                         style: GoogleFonts.poppins().copyWith(
-                                            fontSize: 11,
-                                            fontWeight: (selectedGrafik == '1')
-                                                ? FontWeight.bold
-                                                : FontWeight.w300,
-                                            color: (selectedGrafik == '1')
-                                                ? Colors.white
-                                                : 'FF6969'.toColor()),
-                                      ),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedGrafik = '2';
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(5),
-                                          topRight: Radius.circular(5),
-                                        ),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: 'FF6969'.toColor(),
-                                        ),
-                                        color: (selectedGrafik == '2')
-                                            ? 'FF6969'.toColor()
-                                            : Colors.white,
-                                      ),
-                                      padding: EdgeInsets.only(
-                                          top: 3,
-                                          bottom: 3,
-                                          left: 23,
-                                          right: 23),
-                                      child: Text(
-                                        'Per Minggu',
-                                        style: GoogleFonts.poppins().copyWith(
-                                            fontSize: 11,
-                                            fontWeight: (selectedGrafik == '2')
-                                                ? FontWeight.bold
-                                                : FontWeight.w300,
-                                            color: (selectedGrafik == '2')
-                                                ? Colors.white
-                                                : 'FF6969'.toColor()),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Tanggal',
-                                    style: GoogleFonts.poppins().copyWith(
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 10,
-                                      color: '7A7A7A'.toColor(),
-                                    ),
-                                  ),
-                                  BlocBuilder<HasilBeratCubit, HasilBeratState>(
-                                      builder: (context, state) {
-                                    if (state is HasilBeratLoaded) {
-                                      if (state.hasilberat != null) {
-                                        var date =
-                                            DateTime.fromMillisecondsSinceEpoch(
-                                                state.hasilberat!.checked_at! *
-                                                    1000);
-                                        String tanggal =
-                                            DateFormat('dd MMMM yyyy')
-                                                .format(date);
-                                        return Text(
-                                          tanggal,
-                                          style: GoogleFonts.poppins().copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: (Platform.isIOS) ? 10 : 9,
-                                            color: '343434'.toColor(),
-                                          ),
-                                        );
-                                      } else {
-                                        return SizedBox();
-                                      }
-                                    } else {
-                                      return Center(
-                                        child: CircularProgressIndicator(
-                                          color: 'FF6969'.toColor(),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: (Platform.isIOS) ? 10 : 9,
+                                          color: '343434'.toColor(),
                                         ),
                                       );
+                                    } else {
+                                      return SizedBox();
                                     }
-                                  }),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      )),
+                                  } else {
+                                    return Text('-');
+                                  }
+                                }),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -891,9 +1064,47 @@ class _beratbadanState extends State<beratbadan> {
                   return SizedBox();
                 }
               } else {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: 'FF6969'.toColor(),
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(width: 1, color: 'F0F0F0'.toColor()),
+                  ),
+                  padding: EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hasil Pertumbuhan:',
+                        style: GoogleFonts.poppins().copyWith(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: '323232'.toColor(),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Text(
+                            'Berat Badan:',
+                            style: GoogleFonts.poppins().copyWith(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 11,
+                              color: '414141'.toColor(),
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            '-',
+                            style: GoogleFonts.poppins().copyWith(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 11,
+                              color: '414141'.toColor(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 );
               }

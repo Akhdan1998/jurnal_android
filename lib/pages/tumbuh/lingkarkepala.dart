@@ -55,6 +55,7 @@ class _lingkarkepalaState extends State<lingkarkepala> {
       throw "Error ${res.statusCode} => ${body["meta"]["message"]}";
     }
   }
+
   Future<void> dataLK(
       String anak_id, String lingkarkepala, String checked_at) async {
     Uri url = Uri.parse(
@@ -88,6 +89,7 @@ class _lingkarkepalaState extends State<lingkarkepala> {
       throw "Error ${res.statusCode} => ${body["meta"]["message"]}";
     }
   }
+
   @override
   void initState() {
     super.initState();
@@ -139,14 +141,16 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                               isScrollControlled: true,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(15), topLeft: Radius.circular(15))),
+                                      topRight: Radius.circular(15),
+                                      topLeft: Radius.circular(15))),
                               context: context,
                               builder: (context) {
                                 return SingleChildScrollView(
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+                                          topRight: Radius.circular(15),
+                                          topLeft: Radius.circular(15)),
                                       color: Colors.white,
                                     ),
                                     // height: MediaQuery.of(context).size.height,
@@ -154,9 +158,12 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                                         top: 16,
                                         right: 16,
                                         left: 16,
-                                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                                        bottom: MediaQuery.of(context)
+                                            .viewInsets
+                                            .bottom),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Isi Data Lingkar Kepala',
@@ -183,33 +190,39 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                                               size: 20,
                                               color: '8F8F8F'.toColor(),
                                             ),
-                                            hintStyle: GoogleFonts.poppins().copyWith(
+                                            hintStyle:
+                                                GoogleFonts.poppins().copyWith(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w300,
                                               color: '989797'.toColor(),
                                             ),
                                             hintText: '24 Maret 2023',
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                                              borderSide:
-                                              BorderSide(width: 1, color: 'FF6969'.toColor()),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
+                                              borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: 'FF6969'.toColor()),
                                             ),
-                                            contentPadding:
-                                            EdgeInsets.only(top: 5, left: 10, bottom: 10),
+                                            contentPadding: EdgeInsets.only(
+                                                top: 5, left: 10, bottom: 10),
                                             border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(5)),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
                                           ),
                                           onTap: () async {
-                                            DateTime? pickeddate = await showDatePicker(
-                                                context: context,
-                                                initialDate: DateTime.now(),
-                                                firstDate: DateTime(1945),
-                                                lastDate: DateTime(2500));
+                                            DateTime? pickeddate =
+                                                await showDatePicker(
+                                                    context: context,
+                                                    initialDate: DateTime.now(),
+                                                    firstDate: DateTime(1945),
+                                                    lastDate: DateTime(2500));
 
                                             if (pickeddate != null) {
                                               setState(() {
                                                 tanggalcek3.text =
-                                                    DateFormat('yyyy-MM-dd').format(pickeddate);
+                                                    DateFormat('yyyy-MM-dd')
+                                                        .format(pickeddate);
                                               });
                                             }
                                           },
@@ -228,58 +241,89 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                                           controller: lk,
                                           decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                                              borderSide:
-                                              BorderSide(width: 1, color: 'FF6969'.toColor()),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
+                                              borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: 'FF6969'.toColor()),
                                             ),
-                                            contentPadding:
-                                            EdgeInsets.only(left: 10, top: 5, bottom: 5),
-                                            hintStyle: GoogleFonts.poppins().copyWith(
+                                            contentPadding: EdgeInsets.only(
+                                                left: 10, top: 5, bottom: 5),
+                                            hintStyle:
+                                                GoogleFonts.poppins().copyWith(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w300,
                                               color: '989797'.toColor(),
                                             ),
                                             hintText: '10',
                                             border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                           ),
                                         ),
                                         SizedBox(height: 14),
-                                        BlocBuilder<BuatdataanakCubit, BuatdataanakState>(
+                                        BlocBuilder<BuatdataanakCubit,
+                                            BuatdataanakState>(
                                           builder: (context, snapshot) {
-                                            if (snapshot is BuatdataanakLoaded) {
+                                            if (snapshot
+                                                is BuatdataanakLoaded) {
                                               if (snapshot.dataanak != null) {
                                                 return GestureDetector(
                                                   onTap: () {
-                                                    dataLK(snapshot.dataanak!.first.anak_id.toString(),
-                                                        lk.text, tanggalcek3.text)
+                                                    dataLK(
+                                                            snapshot.dataanak!
+                                                                .first.anak_id
+                                                                .toString(),
+                                                            lk.text,
+                                                            tanggalcek3.text)
                                                         .whenComplete(() {
-                                                      context.read<TumbuhLkCubit>().gettumbuhLk(
-                                                          'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4',
-                                                          snapshot.dataanak!.first.anak_id.toString());
-                                                      context.read<HasilLingkarCubit>().gethasilLingkar(
-                                                        'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4',
-                                                        snapshot.dataanak!.first.gender.toString(),
-                                                        snapshot.dataanak!.first.anak_id.toString(),
-                                                      );
-                                                      Navigator.of(context).pop();
+                                                      context
+                                                          .read<TumbuhLkCubit>()
+                                                          .gettumbuhLk(
+                                                              'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4',
+                                                              snapshot.dataanak!
+                                                                  .first.anak_id
+                                                                  .toString());
+                                                      context
+                                                          .read<
+                                                              HasilLingkarCubit>()
+                                                          .gethasilLingkar(
+                                                            'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4',
+                                                            snapshot.dataanak!
+                                                                .first.gender
+                                                                .toString(),
+                                                            snapshot.dataanak!
+                                                                .first.anak_id
+                                                                .toString(),
+                                                          );
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     });
                                                   },
                                                   child: Container(
                                                     alignment: Alignment.center,
-                                                    width: MediaQuery.of(context).size.width,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
                                                     height: 40,
                                                     decoration: BoxDecoration(
                                                       color: 'FF6969'.toColor(),
-                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
                                                     ),
                                                     child: Text(
                                                       'Simpan Data',
-                                                      style: GoogleFonts.poppins().copyWith(
+                                                      style:
+                                                          GoogleFonts.poppins()
+                                                              .copyWith(
                                                         fontSize: 12,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: 'FFFFFF'.toColor(),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            'FFFFFF'.toColor(),
                                                       ),
                                                     ),
                                                   ),
@@ -289,7 +333,8 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                                               }
                                             } else {
                                               return Center(
-                                                child: CircularProgressIndicator(
+                                                child:
+                                                    CircularProgressIndicator(
                                                   color: 'FF6969'.toColor(),
                                                 ),
                                               );
@@ -342,14 +387,10 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                                   aspectRatio: 15 / 10,
                                   child: LineChart(
                                     LineChartData(
-                                      maxX: 350,
+                                      maxX: 6,
                                       minX: 0,
-                                      maxY: 150,
-                                      minY: 0,
-                                      // maxX: 6,
-                                      // minX: 0,
-                                      // maxY: 50,
-                                      // minY: 31,
+                                      maxY: 50,
+                                      minY: 31,
                                       clipData: FlClipData(
                                           top: true,
                                           bottom: false,
@@ -500,11 +541,153 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                         return SizedBox();
                       }
                     } else {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: 'FF6969'.toColor(),
-                        ),
-                      );
+                      return BlocBuilder<GrafikLKCubit, GrafikLKState>(
+                          builder: (context, data) {
+                        if (data is GrafikLKLoaded) {
+                          if (data.grafiklk != null) {
+                            return Container(
+                              padding: EdgeInsets.only(right: 16),
+                              child: AspectRatio(
+                                aspectRatio: 15 / 10,
+                                child: LineChart(
+                                  LineChartData(
+                                    maxX: 6,
+                                    minX: 0,
+                                    maxY: 50,
+                                    minY: 31,
+                                    clipData: FlClipData(
+                                        top: true,
+                                        bottom: false,
+                                        left: false,
+                                        right: false),
+                                    titlesData: FlTitlesData(
+                                      show: true,
+                                      topTitles: AxisTitles(
+                                        sideTitles: SideTitles(
+                                          showTitles: false,
+                                        ),
+                                      ),
+                                      rightTitles: AxisTitles(
+                                        sideTitles: SideTitles(
+                                          showTitles: false,
+                                        ),
+                                      ),
+                                    ),
+                                    gridData: FlGridData(
+                                      show: true,
+                                      drawVerticalLine: false,
+                                      drawHorizontalLine: true,
+                                    ),
+                                    borderData: FlBorderData(
+                                      show: true,
+                                      border: Border(
+                                        top: BorderSide(
+                                          style: BorderStyle.solid,
+                                          color: 'CFCFCF'.toColor(),
+                                        ),
+                                      ),
+                                    ),
+                                    lineBarsData: [
+                                      LineChartBarData(
+                                        spots: data.grafiklk!.tigasd!
+                                            .map((e) => FlSpot(
+                                                e.bulan!.toDouble(),
+                                                e.lk!.toDouble() ?? 0.0))
+                                            .toList(),
+                                        isCurved: true,
+                                        color: Colors.blue,
+                                        // color: 'FF6969'.toColor(),
+                                        barWidth: 1,
+                                        dotData: FlDotData(show: false),
+                                      ),
+                                      LineChartBarData(
+                                        spots: data.grafiklk!.duasd!
+                                            .map((e) => FlSpot(
+                                                e.bulan!.toDouble(),
+                                                e.lk!.toDouble() ?? 0.0))
+                                            .toList(),
+                                        isCurved: true,
+                                        color: 'FD7948'.toColor(),
+                                        // color: 'FF6969'.toColor(),
+                                        barWidth: 1,
+                                        dotData: FlDotData(show: false),
+                                      ),
+                                      LineChartBarData(
+                                        spots: data.grafiklk!.satusd!
+                                            .map((e) => FlSpot(
+                                                e.bulan!.toDouble(),
+                                                e.lk!.toDouble() ?? 0.0))
+                                            .toList(),
+                                        isCurved: true,
+                                        color: '9E401E'.toColor(),
+                                        // color: 'FF6969'.toColor(),
+                                        barWidth: 1,
+                                        dotData: FlDotData(show: false),
+                                      ),
+                                      LineChartBarData(
+                                        spots: data.grafiklk!.median!
+                                            .map((e) => FlSpot(
+                                                e.bulan!.toDouble(),
+                                                e.lk!.toDouble() ?? 0.0))
+                                            .toList(),
+                                        isCurved: true,
+                                        color: '529166'.toColor(),
+                                        // color: 'FF6969'.toColor(),
+                                        barWidth: 1,
+                                        dotData: FlDotData(show: false),
+                                      ),
+                                      LineChartBarData(
+                                        spots: data.grafiklk!.mintigasd!
+                                            .map((e) => FlSpot(
+                                                e.bulan!.toDouble(),
+                                                e.lk!.toDouble() ?? 0.0))
+                                            .toList(),
+                                        isCurved: true,
+                                        color: '9E401E'.toColor(),
+                                        // color: 'FF6969'.toColor(),
+                                        barWidth: 1,
+                                        dotData: FlDotData(show: false),
+                                      ),
+                                      LineChartBarData(
+                                        spots: data.grafiklk!.minduasd!
+                                            .map((e) => FlSpot(
+                                                e.bulan!.toDouble(),
+                                                e.lk!.toDouble() ?? 0.0))
+                                            .toList(),
+                                        isCurved: true,
+                                        color: 'FF6969'.toColor(),
+                                        barWidth: 1,
+                                        dotData: FlDotData(show: false),
+                                      ),
+                                      LineChartBarData(
+                                        spots: data.grafiklk!.minsatusd!
+                                            .map((e) => FlSpot(
+                                                e.bulan!.toDouble(),
+                                                e.lk!.toDouble() ?? 0.0))
+                                            .toList(),
+                                        isCurved: true,
+                                        color: Colors.purpleAccent,
+                                        // color: 'FC7847'.toColor(),
+                                        // color: 'FF6969'.toColor(),
+                                        barWidth: 1,
+                                        dotData: FlDotData(show: false),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          } else {
+                            return SizedBox();
+                          }
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: 'FF6969'.toColor(),
+                            ),
+                          );
+                        }
+                      });
                     }
                   }),
                   SizedBox(height: 11),
@@ -772,7 +955,7 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                                       return SizedBox();
                                     }
                                   } else {
-                                    return SizedBox();
+                                    return Text('-');
                                   }
                                 }),
                               ],
@@ -821,8 +1004,9 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                             ),
                             SizedBox(width: 5),
                             Text(
-                              snapshot.hasillingkar!.hasil!.lingkar
-                                      .toString() + ' ' + 'cm' ??
+                              snapshot.hasillingkar!.hasil!.lingkar.toString() +
+                                      ' ' +
+                                      'cm' ??
                                   '',
                               style: GoogleFonts.poppins().copyWith(
                                 fontWeight: FontWeight.w300,
@@ -891,9 +1075,47 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                   return SizedBox();
                 }
               } else {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: 'FF6969'.toColor(),
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(width: 1, color: 'F0F0F0'.toColor()),
+                  ),
+                  padding: EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hasil Pertumbuhan:',
+                        style: GoogleFonts.poppins().copyWith(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: '323232'.toColor(),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Text(
+                            'Lingkar Kepala:',
+                            style: GoogleFonts.poppins().copyWith(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 11,
+                              color: '414141'.toColor(),
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            '-',
+                            style: GoogleFonts.poppins().copyWith(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 11,
+                              color: '414141'.toColor(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 );
               }
@@ -967,22 +1189,40 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                               ),
                               SizedBox(height: 10),
                               Column(
-                                children: snapshot.tumbuhLk!
-                                    .map(
-                                      (e) {
-                                        DateTime haha = DateFormat('yyyy-MM-dd hh:mm:ss')
-                                            .parse(e.checked_at!);
+                                children: snapshot.tumbuhLk!.map((e) {
+                                  DateTime haha =
+                                      DateFormat('yyyy-MM-dd hh:mm:ss')
+                                          .parse(e.checked_at!);
 
-                                        String date =
-                                        DateFormat('dd MMMM yyy').format(haha);
-                                        return Column(
-                                          children: [
-                                            Row(
+                                  String date =
+                                      DateFormat('dd MMMM yyy').format(haha);
+                                  return Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            date,
+                                            style:
+                                                GoogleFonts.poppins().copyWith(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.bold,
+                                              color: '414141'.toColor(),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 113,
+                                            child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
-                                                  date,
+                                                  e.lingkar_kepala.toString() +
+                                                          ' ' +
+                                                          'cm' ??
+                                                      '',
                                                   style: GoogleFonts.poppins()
                                                       .copyWith(
                                                     fontSize: 11,
@@ -990,110 +1230,93 @@ class _lingkarkepalaState extends State<lingkarkepala> {
                                                     color: '414141'.toColor(),
                                                   ),
                                                 ),
-                                                Container(
-                                                  width: 113,
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        e.lingkar_kepala
-                                                            .toString() + ' ' + 'cm' ??
-                                                            '',
-                                                        style: GoogleFonts.poppins()
-                                                            .copyWith(
-                                                          fontSize: 11,
-                                                          fontWeight:
-                                                          FontWeight.bold,
-                                                          color: '414141'.toColor(),
-                                                        ),
-                                                      ),
-                                                      SizedBox(width: 6),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          showDialog(
-                                                              context: context,
-                                                              builder: (BuildContext
-                                                              context) {
-                                                                return AlertDialog(
-                                                                  title: Text(
-                                                                    'Hapus data lingkar kepala anak',
-                                                                    style: GoogleFonts.poppins().copyWith(
-                                                                        fontSize:
-                                                                        13,
-                                                                        fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                        color: Colors
-                                                                            .black),
-                                                                  ),
-                                                                  content: Text(
-                                                                    'Kamu yakin akan menghapus data lingkar kepala badan anak?',
-                                                                    style: GoogleFonts.poppins().copyWith(
-                                                                        fontSize:
-                                                                        13,
-                                                                        fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                        color: Colors
-                                                                            .black),
-                                                                  ),
-                                                                  actions: [
-                                                                    TextButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.of(
-                                                                            context)
-                                                                            .pop();
-                                                                      },
-                                                                      child: Text(
-                                                                        'Tidak',
-                                                                        style: GoogleFonts.poppins().copyWith(
-                                                                            fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                            color: 'FF6969'
-                                                                                .toColor()),
-                                                                      ),
-                                                                    ),
-                                                                    TextButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        deleted(e.id
-                                                                            .toString());
-                                                                      },
-                                                                      child: Text(
-                                                                        'Ya',
-                                                                        style: GoogleFonts.poppins().copyWith(
-                                                                            fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                            color: 'FF6969'
-                                                                                .toColor()),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              });
-                                                        },
-                                                        child: Container(
-                                                          color: Colors.transparent,
-                                                          child: Icon(
-                                                            Icons.delete,
-                                                            color: 'FF6969'.toColor(),
-                                                            size: 18,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
+                                                SizedBox(width: 6),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                              'Hapus data lingkar kepala anak',
+                                                              style: GoogleFonts
+                                                                      .poppins()
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .black),
+                                                            ),
+                                                            content: Text(
+                                                              'Kamu yakin akan menghapus data lingkar kepala badan anak?',
+                                                              style: GoogleFonts
+                                                                      .poppins()
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      color: Colors
+                                                                          .black),
+                                                            ),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child: Text(
+                                                                  'Tidak',
+                                                                  style: GoogleFonts.poppins().copyWith(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: 'FF6969'
+                                                                          .toColor()),
+                                                                ),
+                                                              ),
+                                                              TextButton(
+                                                                onPressed: () {
+                                                                  deleted(e.id
+                                                                      .toString());
+                                                                },
+                                                                child: Text(
+                                                                  'Ya',
+                                                                  style: GoogleFonts.poppins().copyWith(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: 'FF6969'
+                                                                          .toColor()),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        });
+                                                  },
+                                                  child: Container(
+                                                    color: Colors.transparent,
+                                                    child: Icon(
+                                                      Icons.delete,
+                                                      color: 'FF6969'.toColor(),
+                                                      size: 18,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        );
-                                      }
-                                    )
-                                    .toList(),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }).toList(),
                               ),
                             ],
                           ),

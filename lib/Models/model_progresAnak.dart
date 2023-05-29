@@ -2,6 +2,7 @@ class AnakProgress {
   int? id;
   int? usia;
   String? judul;
+  String? icon;
   String? berat;
   String? panjang;
   String? jantung;
@@ -12,20 +13,22 @@ class AnakProgress {
 
   AnakProgress(
       {this.id,
-      this.usia,
-      this.judul,
-      this.berat,
-      this.panjang,
-      this.jantung,
-      this.deskripsi,
-      this.created_at,
-      this.updated_at,
-      this.deleted_at});
+        this.usia,
+        this.judul,
+        this.icon,
+        this.berat,
+        this.panjang,
+        this.jantung,
+        this.deskripsi,
+        this.created_at,
+        this.updated_at,
+        this.deleted_at});
 
   AnakProgress.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     usia = json['usia'];
     judul = json['judul'];
+    icon = json['icon'];
     berat = json['berat'];
     panjang = json['panjang'];
     jantung = json['jantung'];
@@ -33,20 +36,5 @@ class AnakProgress {
     created_at = json['created_at'];
     updated_at = json['updated_at'];
     deleted_at = json['deleted_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['usia'] = usia;
-    data['judul'] = judul;
-    data['berat'] = berat;
-    data['panjang'] = panjang;
-    data['jantung'] = jantung;
-    data['deskripsi'] = deskripsi;
-    data['created_at'] = created_at;
-    data['updated_at'] = updated_at;
-    data['deleted_at'] = deleted_at;
-    return data;
   }
 }

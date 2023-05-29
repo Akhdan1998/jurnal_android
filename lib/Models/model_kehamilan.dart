@@ -6,7 +6,7 @@ class Kelahiran {
   int? anak_id;
   String? nama_anak;
   String? hpht;
-  int? hpl;
+  String? hpl;
   double? progress;
   int? usia;
   int? trimester;
@@ -23,7 +23,7 @@ class Kelahiran {
     anak_id = json['anak_id'];
     nama_anak = json['nama_anak'];
     hpht = json['hpht'];
-    hpl = json['hpl'] ?? 0;
+    hpl = json['hpl'];
     progress = json['progress'].toDouble();
     usia = json['usia'];
     trimester = json['trimester'];
