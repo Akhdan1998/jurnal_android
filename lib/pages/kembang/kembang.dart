@@ -34,6 +34,9 @@ class _KembangState extends State<Kembang> {
         .getMilestone('Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4');
     context.read<KategoriCubit>().getMilestonesKat(
         'Bearer 1354|r5uOe7c4yC14CDvrkeTfP73s0AIrkG01EKos4lC4');
+    if (selectedUsia == null) {
+      selectedUsia = listed.first;
+    }
   }
 
   double total_percent = 0;
@@ -115,62 +118,62 @@ class _KembangState extends State<Kembang> {
                                     children: [
                                       Row(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Container(
                                             width: 40,
                                             height: 40,
                                             child: Image.asset((snapshot
-                                                .dataanak!
-                                                .firstWhere((e) =>
-                                            e.is_active == 1)
-                                                .gender ==
-                                                'Laki-laki')
+                                                        .dataanak!
+                                                        .firstWhere((e) =>
+                                                            e.is_active == 1)
+                                                        .gender ==
+                                                    'Laki-laki')
                                                 ? 'assets/laki.png'
                                                 : 'assets/cwe.png'),
                                           ),
                                           SizedBox(width: 9),
                                           Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width -
+                                                        .size
+                                                        .width -
                                                     113,
                                                 child: Row(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Text(
                                                       snapshot.dataanak!
-                                                          .firstWhere((e) =>
-                                                      e.is_active ==
-                                                          1)
-                                                          .name ??
+                                                              .firstWhere((e) =>
+                                                                  e.is_active ==
+                                                                  1)
+                                                              .name ??
                                                           '',
                                                       style: GoogleFonts
-                                                          .poppins()
+                                                              .poppins()
                                                           .copyWith(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .bold,
-                                                          color: '323232'
-                                                              .toColor()),
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color: '323232'
+                                                                  .toColor()),
                                                     ),
                                                     GestureDetector(
                                                       onTap: () {
                                                         showModalBottomSheet(
                                                           backgroundColor:
-                                                          Colors.white,
+                                                              Colors.white,
                                                           shape:
-                                                          RoundedRectangleBorder(
+                                                              RoundedRectangleBorder(
                                                             borderRadius:
-                                                            BorderRadius
-                                                                .only(
+                                                                BorderRadius
+                                                                    .only(
                                                               topRight: Radius
                                                                   .circular(15),
                                                               topLeft: Radius
@@ -179,7 +182,7 @@ class _KembangState extends State<Kembang> {
                                                           ),
                                                           context: context,
                                                           builder: (BuildContext
-                                                          context) {
+                                                              context) {
                                                             return bottomsheetImunisasi(
                                                                 snapshot
                                                                     .dataanak!);
@@ -191,11 +194,11 @@ class _KembangState extends State<Kembang> {
                                                           Text(
                                                             'Ganti Anak',
                                                             style: GoogleFonts
-                                                                .poppins()
+                                                                    .poppins()
                                                                 .copyWith(
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .w300,
+                                                                  FontWeight
+                                                                      .w300,
                                                               fontSize: 10,
                                                               color: 'FF6969'
                                                                   .toColor(),
@@ -219,15 +222,15 @@ class _KembangState extends State<Kembang> {
                                                 children: [
                                                   Text(
                                                     snapshot.dataanak!
-                                                        .firstWhere((e) =>
-                                                    e.is_active ==
-                                                        1)
-                                                        .gender ??
+                                                            .firstWhere((e) =>
+                                                                e.is_active ==
+                                                                1)
+                                                            .gender ??
                                                         '',
                                                     style: GoogleFonts.poppins()
                                                         .copyWith(
                                                       fontWeight:
-                                                      FontWeight.w300,
+                                                          FontWeight.w300,
                                                       fontSize: 11,
                                                       color: '7A7A7A'.toColor(),
                                                     ),
@@ -238,7 +241,7 @@ class _KembangState extends State<Kembang> {
                                                     style: GoogleFonts.poppins()
                                                         .copyWith(
                                                       fontWeight:
-                                                      FontWeight.w300,
+                                                          FontWeight.w300,
                                                       fontSize: 11,
                                                       color: '7A7A7A'.toColor(),
                                                     ),
@@ -246,15 +249,15 @@ class _KembangState extends State<Kembang> {
                                                   SizedBox(width: 3),
                                                   Text(
                                                     snapshot.dataanak!.first
-                                                        .umur_tahun
-                                                        .toString() +
-                                                        ' ' +
-                                                        'Tahun' ??
+                                                                .umur_tahun
+                                                                .toString() +
+                                                            ' ' +
+                                                            'Tahun' ??
                                                         '',
                                                     style: GoogleFonts.poppins()
                                                         .copyWith(
                                                       fontWeight:
-                                                      FontWeight.w300,
+                                                          FontWeight.w300,
                                                       fontSize: 11,
                                                       color: '7A7A7A'.toColor(),
                                                     ),
@@ -262,15 +265,15 @@ class _KembangState extends State<Kembang> {
                                                   SizedBox(width: 3),
                                                   Text(
                                                     snapshot.dataanak!.first
-                                                        .umur_bulan
-                                                        .toString() +
-                                                        ' ' +
-                                                        'Bulan' ??
+                                                                .umur_bulan
+                                                                .toString() +
+                                                            ' ' +
+                                                            'Bulan' ??
                                                         '',
                                                     style: GoogleFonts.poppins()
                                                         .copyWith(
                                                       fontWeight:
-                                                      FontWeight.w300,
+                                                          FontWeight.w300,
                                                       fontSize: 11,
                                                       color: '7A7A7A'.toColor(),
                                                     ),
@@ -283,39 +286,39 @@ class _KembangState extends State<Kembang> {
                                       ),
                                       Container(
                                         width:
-                                        MediaQuery.of(context).size.width,
+                                            MediaQuery.of(context).size.width,
                                         child: Row(
                                           children: [
                                             Text(
                                               'Pencapaian Total',
                                               style: GoogleFonts.poppins()
                                                   .copyWith(
-                                                  fontWeight:
-                                                  FontWeight.w300,
-                                                  fontSize: 12,
-                                                  color:
-                                                  '323232'.toColor()),
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontSize: 12,
+                                                      color:
+                                                          '323232'.toColor()),
                                             ),
                                             SizedBox(width: 10),
                                             Container(
                                               width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
+                                                      .size
+                                                      .width -
                                                   180,
                                               child: Row(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   DropdownButton<String>(
                                                     value: selectedUsia,
                                                     icon: Icon(
                                                         Icons.expand_more,
                                                         color:
-                                                        'FF6969'.toColor()),
+                                                            'FF6969'.toColor()),
                                                     style: TextStyle(
                                                         color:
-                                                        'FF6969'.toColor()),
+                                                            'FF6969'.toColor()),
                                                     underline: SizedBox(),
                                                     onChanged: (String? value) {
                                                       setState(() {
@@ -323,35 +326,35 @@ class _KembangState extends State<Kembang> {
                                                       });
                                                     },
                                                     items: listed.map<
-                                                        DropdownMenuItem<
-                                                            String>>(
-                                                            (String value) {
-                                                          return DropdownMenuItem<
-                                                              String>(
-                                                            value: value,
-                                                            child: Text(
-                                                              value,
-                                                              style: GoogleFonts
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: Text(
+                                                          value,
+                                                          style: GoogleFonts
                                                                   .poppins()
-                                                                  .copyWith(
-                                                                fontSize: 11,
-                                                                fontWeight:
+                                                              .copyWith(
+                                                            fontSize: 11,
+                                                            fontWeight:
                                                                 FontWeight.bold,
-                                                                color: 'FF6969'
-                                                                    .toColor(),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }).toList(),
+                                                            color: 'FF6969'
+                                                                .toColor(),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }).toList(),
                                                   ),
                                                   BlocBuilder<KategoriCubit,
                                                       KategoriState>(
                                                     builder:
                                                         (context, snapshot) {
                                                       if (snapshot
-                                                      is KategoriLoaded) {
+                                                          is KategoriLoaded) {
                                                         if (snapshot
-                                                            .milestones !=
+                                                                .milestones !=
                                                             null) {
                                                           return Row(
                                                             children: [
@@ -359,30 +362,30 @@ class _KembangState extends State<Kembang> {
                                                                 snapshot
                                                                     .milestones!
                                                                     .where((e) =>
-                                                                e.usia ==
-                                                                    selectedUsia)
+                                                                        e.usia ==
+                                                                        selectedUsia)
                                                                     .first
                                                                     .pencapaian
                                                                     .toString(),
                                                                 style: GoogleFonts
-                                                                    .poppins()
+                                                                        .poppins()
                                                                     .copyWith(
-                                                                    fontSize:
-                                                                    10,
-                                                                    color: '7A7A7A'
-                                                                        .toColor()),
+                                                                        fontSize:
+                                                                            10,
+                                                                        color: '7A7A7A'
+                                                                            .toColor()),
                                                               ),
                                                               SizedBox(
                                                                   width: 5),
                                                               Text(
                                                                 'dari',
                                                                 style: GoogleFonts
-                                                                    .poppins()
+                                                                        .poppins()
                                                                     .copyWith(
-                                                                    fontSize:
-                                                                    10,
-                                                                    color: '7A7A7A'
-                                                                        .toColor()),
+                                                                        fontSize:
+                                                                            10,
+                                                                        color: '7A7A7A'
+                                                                            .toColor()),
                                                               ),
                                                               SizedBox(
                                                                   width: 5),
@@ -390,18 +393,18 @@ class _KembangState extends State<Kembang> {
                                                                 snapshot
                                                                     .milestones!
                                                                     .where((e) =>
-                                                                e.usia ==
-                                                                    selectedUsia)
+                                                                        e.usia ==
+                                                                        selectedUsia)
                                                                     .first
                                                                     .total_pencapaian
                                                                     .toString(),
                                                                 style: GoogleFonts
-                                                                    .poppins()
+                                                                        .poppins()
                                                                     .copyWith(
-                                                                    fontSize:
-                                                                    10,
-                                                                    color: '7A7A7A'
-                                                                        .toColor()),
+                                                                        fontSize:
+                                                                            10,
+                                                                        color: '7A7A7A'
+                                                                            .toColor()),
                                                               ),
                                                             ],
                                                           );
@@ -426,51 +429,51 @@ class _KembangState extends State<Kembang> {
                                 ),
                                 BlocBuilder<KategoriCubit, KategoriState>(
                                     builder: (context, snapshot) {
-                                      if (snapshot is KategoriLoaded) {
-                                        if (snapshot.milestones != null) {
-                                          pencapaian_percent = snapshot.milestones!
-                                              .where((element) =>
-                                          element.usia == selectedUsia)
-                                              .first
-                                              .pencapaian!
-                                              .toDouble();
-                                          total_pencapaian_percent = snapshot
-                                              .milestones!
-                                              .where((element) =>
-                                          element.usia == selectedUsia)
-                                              .first
-                                              .total_pencapaian!
-                                              .toDouble();
-                                          double point =
-                                              1.00 / total_pencapaian_percent;
-                                          total_percent =
-                                              pencapaian_percent * point;
-                                          return Container(
-                                            padding: EdgeInsets.only(bottom: 15),
-                                            child: LinearPercentIndicator(
-                                              width: (Platform.isIOS)
-                                                  ? (MediaQuery.of(context)
-                                                  .size
-                                                  .width -
+                                  if (snapshot is KategoriLoaded) {
+                                    if (snapshot.milestones != null) {
+                                      pencapaian_percent = snapshot.milestones!
+                                          .where((element) =>
+                                              element.usia == selectedUsia)
+                                          .first
+                                          .pencapaian!
+                                          .toDouble();
+                                      total_pencapaian_percent = snapshot
+                                          .milestones!
+                                          .where((element) =>
+                                              element.usia == selectedUsia)
+                                          .first
+                                          .total_pencapaian!
+                                          .toDouble();
+                                      double point =
+                                          1.00 / total_pencapaian_percent;
+                                      total_percent =
+                                          pencapaian_percent * point;
+                                      return Container(
+                                        padding: EdgeInsets.only(bottom: 15),
+                                        child: LinearPercentIndicator(
+                                          width: (Platform.isIOS)
+                                              ? (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
                                                   34)
-                                                  : (MediaQuery.of(context)
-                                                  .size
-                                                  .width -
+                                              : (MediaQuery.of(context)
+                                                      .size
+                                                      .width -
                                                   239),
-                                              lineHeight: 13,
-                                              percent: total_percent,
-                                              barRadius: Radius.circular(20),
-                                              progressColor: 'FF6969'.toColor(),
-                                              backgroundColor: 'FFE7E7'.toColor(),
-                                            ),
-                                          );
-                                        } else {
-                                          return SizedBox();
-                                        }
-                                      } else {
-                                        return SizedBox();
-                                      }
-                                    }),
+                                          lineHeight: 13,
+                                          percent: total_percent,
+                                          barRadius: Radius.circular(20),
+                                          progressColor: 'FF6969'.toColor(),
+                                          backgroundColor: 'FFE7E7'.toColor(),
+                                        ),
+                                      );
+                                    } else {
+                                      return SizedBox();
+                                    }
+                                  } else {
+                                    return SizedBox();
+                                  }
+                                }),
                               ],
                             ),
                           ),
@@ -566,16 +569,16 @@ class _KembangState extends State<Kembang> {
                                       child: Container(
                                         alignment: Alignment.center,
                                         width:
-                                        MediaQuery.of(context).size.width,
+                                            MediaQuery.of(context).size.width,
                                         height: 40,
                                         decoration: BoxDecoration(
                                           color: 'FF6969'.toColor(),
                                           borderRadius:
-                                          BorderRadius.circular(5),
+                                              BorderRadius.circular(5),
                                         ),
                                         child: Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                           children: [
                                             Text(
                                               'Buat Data Anak',
