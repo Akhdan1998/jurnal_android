@@ -458,8 +458,7 @@ class _KembangState extends State<Kembang> {
                                                   34)
                                               : (MediaQuery.of(context)
                                                       .size
-                                                      .width -
-                                                  239),
+                                                      .width - 34),
                                           lineHeight: 13,
                                           percent: total_percent,
                                           barRadius: Radius.circular(20),
