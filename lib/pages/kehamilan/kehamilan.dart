@@ -3,11 +3,10 @@ part of '../pages.dart';
 List<String> list = <String>[
   'Semua',
   'Bunga',
+  'Bulan',
   'Islami',
   'Sansekerta',
-  'Galaxy',
-  'Wastern',
-  'Zodiak'
+  'Galaxy'
 ];
 
 class Kehamilan extends StatefulWidget {
